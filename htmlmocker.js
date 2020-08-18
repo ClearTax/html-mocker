@@ -5,7 +5,7 @@ let classList = ["hm-text", "hm-img"];
 function generateRandomString(length) {
   var result = "";
   var characters =
-    "ABCD\nE FGHIJKL 😀😀😀😀😀😀😀😀😀😀😀😀MNOPQRST UVWXY\n\tZabcdefg hijklmnopq rstuvwxyz0\t123456789";
+    "ABCD\nE FGHIJKL MNOPQRST UVWXY\n\tZabcdefg hijklmnopq rstuvwxyz0\t123456789";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));

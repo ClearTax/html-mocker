@@ -15,12 +15,12 @@ anywhere between the minimum length 30 and maximum length 90. Similiarily, const
 video sizes, # of children elements in a list etc. For a list, mock children elements will be generated
 
 Some examples of the constraints are:
-size-30__50 (from 30 to 50 chars)
-size-\_\_50 (up to 50 chars)
-size-50__ (from 50 to anysize)
-size-45 (exactly 45 chars)
-size-"50x50__500x500" (50px x 50px to 600px x 600px)
-size-3__7 (list size from minimum 3 to maximum 7)
+- size-30__50 (from 30 to 50 chars)
+- size-\_\_50 (up to 50 chars)
+- size-50__ (from 50 to anysize)
+- size-45 (exactly 45 chars)
+- size-"50x50__500x500" (50px x 50px to 600px x 600px)
+- size-3__7 (list size from minimum 3 to maximum 7)
 
 Ideas for more constraints: 
 - Allowed characters (such as whitespace or emojis)

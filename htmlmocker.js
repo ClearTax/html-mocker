@@ -1,11 +1,11 @@
 console.log("script loaded");
 
-let classList = ["hm-text"];
+let classList = ["hm-text", "hm-img"];
 
 function generateRandomString(length) {
   var result = "";
   var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    "ABCD\nE FGHIJKL 😀😀😀😀😀😀😀😀😀😀😀😀MNOPQRST UVWXY\n\tZabcdefg hijklmnopq rstuvwxyz0\t123456789";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -40,10 +40,20 @@ classList.forEach(function (kind) {
           el.innerText = generateRandomString(length);
 
           break;
+        case "hm-img":
+          let min_width = Math.ceil(Number(constraints["size"].split("__")[0].split("x")[0]));
+          let min_height = Math.ceil(Number(constraints["size"].split("__")[0].split("x")[1]));
+          let max_width = Math.ceil(Number(constraints["size"].split("__")[1].split("x")[0]));
+          let max_height = Math.ceil(Number(constraints["size"].split("__")[1].split("x")[1]));
+          let random_width = Math.floor(Math.random() * (max_width + 1 - min_width)) + min_width;
+          let random_height = Math.floor(Math.random() * (max_height + 1 - min_height)) + min_height;
+          el.src = "https://picsum.photos/" + random_width + "/" + random_height
+
+          break;
 
         default:
           console.log("Unknown HTML Mocker kind: " + kind);
       }
-    }, 2000);
+    }, 10000);
   });
 });

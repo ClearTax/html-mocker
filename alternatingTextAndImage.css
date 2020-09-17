@@ -1,0 +1,91 @@
+/* layout relevant styles */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  main {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+  }
+  
+  article {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  article:nth-child(odd) {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  article .img {
+    flex-basis: 50%;
+  }
+  article .img img {
+    width: 100%;
+  }
+  article .content {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  article .content .cta {
+    align-self: center;
+  }
+  
+  /* other styles */
+  article {
+    font-family: Roboto, sans-serif;
+  }
+  article .content {
+    padding: 50px;
+    box-sizing: border-box;
+  }
+  article h1 {
+    font-size: 1.5rem;
+  }
+  article p {
+    font-size: 0.9rem;
+  }
+  
+  .cta {
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #000;
+    line-height: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #000;
+    text-decoration: none;
+    margin-top: 10px;
+    position: relative;
+    box-sizing: border-box;
+  }
+  .cta:hover {
+    background: #000;
+    color: #fff;
+  }
+  .cta:hover::after {
+    right: 10px;
+  }
+  .cta::after {
+    content: ">";
+    font-family: "Jua";
+    position: absolute;
+    right: 15px;
+    transition: right 1s ease;
+  }
+  
+  a, a:hover {
+    transition: all 0.3s ease;
+  }
+

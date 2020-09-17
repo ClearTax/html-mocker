@@ -1,6 +1,7 @@
 console.log("script loaded");
+const INTERVAL_TIME = 6000;
 
-let classList = ["hm-text","hm-img","hm-list"];
+let classList = ["hm-text", "hm-img", "hm-list"];
 
 function generateRandomString(constraints) {
   // Generate random string of given length from a
@@ -40,8 +41,7 @@ function getRandomImage(constraints) {
   let randomWidth =
     Math.floor(Math.random() * (maxWidth + 1 - minWidth)) + minWidth;
   let randomHeight =
-    Math.floor(Math.random() * (maxHeight + 1 - minHeight)) +
-    minHeight;
+    Math.floor(Math.random() * (maxHeight + 1 - minHeight)) + minHeight;
   return "https://picsum.photos/" + randomWidth + "/" + randomHeight;
 }
 
@@ -55,72 +55,100 @@ function getConstraints(className, kind) {
     }, {});
 }
 
-function generateRandomList(length){
-  let list = document.querySelector(".hm-list");
-  let listClone = list.cloneNode(true);
-  list.innerText = "";
-  let className =  listClone.children[0].children[0].className;
-  let childType = className.split(" ")[0];
-  if (childType == "hm-list-text"){
-    constraints = getConstraints(className, "hm-list-text");
-  }
-  else if(childType == "hm-list-img"){
-    constraints = getConstraints(className, "hm-list-img");
-  }
+function generateRandomList(min, max, list, childType, childClassName, childInnerHTML) {
 
-  // generae new list of given length and random childs
+  // get a random number of childs respecting the  given constraints
+  let length = Math.floor(Math.random() * (max + 1 - min)) + min;
+  console.log(length);
+
+  //clear all childrens
+  list.innerText = "";
+
+
+  // let className = listClone.children[0].children[0].className;
+  // let childType = className.split(" ")[0];
+  // if (childType == "hm-list-text") {
+  //   constraints = getConstraints(className, "hm-list-text");
+  // } else if (childType == "hm-list-img") {
+  //   constraints = getConstraints(className, "hm-list-img");
+  // }
+
+  // append  childs to the parent list
   for (let i = 0; i < length; i++) {
-    if (childType == "hm-list-text"){
-      let child = listClone.children[0].children[0].cloneNode(true);
-      child.innerText = generateRandomString(constraints);
-      let li = document.createElement("li");
-      li.appendChild(child);
-      list.appendChild(li);
-    }
-    else if(childType == "hm-list-img"){
-      let child = listClone.children[0].children[0].cloneNode(true);
-      child.src = getRandomImage(constraints);
-      let li = document.createElement("li");
-      li.appendChild(child);
-      list.appendChild(li);
-    }
+    child  = document.createElement(childType)
+    child.className = childClassName
+    child.innerHTML = childInnerHTML
+    list.appendChild(child)
+    // if (childType == "hm-list-text") {
+    //   let child = listClone.children[0].children[0].cloneNode(true);
+    //   child.innerText = generateRandomString(constraints);
+    //   let li = document.createElement("li");
+    //   li.appendChild(child);
+    //   list.appendChild(li);
+    // } else if (childType == "hm-list-img") {
+    //   let child = listClone.children[0].children[0].cloneNode(true);
+    //   child.src = getRandomImage(constraints);
+    //   let li = document.createElement("li");
+    //   li.appendChild(child);
+    //   list.appendChild(li);
+    // }
   }
 }
 
+// async function clonenode(classname) {
+//   const list = document.querySelector(".hm-list");
+//   const listClone = list.cloneNode(true);
+//   return { list, listClone };
+// }
 
-
-classList.forEach(function (kind) {
-  document.querySelectorAll("." + kind).forEach(function (el) {
+classList.forEach(async function (kind) {
+  document.querySelectorAll("." + kind).forEach(async function (el) {
     let constraints = getConstraints(el.className, kind);
 
-    setInterval(function () {
-      // Generate a random text / image source / list that respects the constraints but explores the
-      // boundary conditions
-      switch (kind) {
-        case "hm-text":
-          // Generate random text
+    // Generate a random text / image source / list that respects the constraints but explores the
+    // boundary conditions
+    switch (kind) {
+      case "hm-text":
+        // Generate random text
+        setInterval(function () {
           el.innerText = generateRandomString(constraints);
-          break;
+        }, INTERVAL_TIME);
+        break;
 
-        case "hm-img":
-          // replace image with random images respecting the constraints
+      case "hm-img":
+        // replace image with random images respecting the constraints
+        setInterval(function () {
           el.src = getRandomImage(constraints);
-          break;
+        }, INTERVAL_TIME);
+        break;
 
-        case "hm-list":
-          // get size constraints of the list
-          let min = Math.ceil(Number(constraints["size"].split("__")[0]));
-          let max = Math.floor(Number(constraints["size"].split("__")[1]));
-          // random size respecting the given constraints
-          let length = Math.floor(Math.random() * (max + 1 - min)) + min;
-          
-          //generate random list
-          generateRandomList(length);
-          break;
+      case "hm-list":
+        // get size constraints of the list
+        let min = Math.ceil(Number(constraints["size"].split("__")[0]));
+        let max = Math.floor(Number(constraints["size"].split("__")[1]));
+        // random size respecting the given constraints
+        console.log("here");
 
-        default:
-          console.log("Unknown HTML Mocker kind: " + kind);
-      }
-    }, 6000);
+        // const { list, listClone } = await clonenode(".hm-list");
+          const list = document.querySelector(".hm-list");
+          const listClone = list.cloneNode(true);
+          const childInnerHTML = listClone.children[0].innerHTML;
+          const childType = listClone.children[0].nodeName.toLowerCase();
+          const childClassName  = listClone.children[0].className;
+
+        console.log("outside function: list ", list.children[0]);
+        console.log("outside function: listclone ", listClone.children[0]);
+
+        //generate random list
+        setInterval(() => {
+          //  setTimeout(()=>{
+          generateRandomList(min, max, list, childType, childClassName, childInnerHTML);
+        }, INTERVAL_TIME);
+
+        break;
+
+      default:
+        console.log("Unknown HTML Mocker kind: " + kind);
+    }
   });
 });

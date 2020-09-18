@@ -64,42 +64,14 @@ function generateRandomList(min, max, list, childType, childClassName, childInne
   //clear all childrens
   list.innerText = "";
 
-
-  // let className = listClone.children[0].children[0].className;
-  // let childType = className.split(" ")[0];
-  // if (childType == "hm-list-text") {
-  //   constraints = getConstraints(className, "hm-list-text");
-  // } else if (childType == "hm-list-img") {
-  //   constraints = getConstraints(className, "hm-list-img");
-  // }
-
   // append  childs to the parent list
   for (let i = 0; i < length; i++) {
-    child  = document.createElement(childType)
-    child.className = childClassName
-    child.innerHTML = childInnerHTML
-    list.appendChild(child)
-    // if (childType == "hm-list-text") {
-    //   let child = listClone.children[0].children[0].cloneNode(true);
-    //   child.innerText = generateRandomString(constraints);
-    //   let li = document.createElement("li");
-    //   li.appendChild(child);
-    //   list.appendChild(li);
-    // } else if (childType == "hm-list-img") {
-    //   let child = listClone.children[0].children[0].cloneNode(true);
-    //   child.src = getRandomImage(constraints);
-    //   let li = document.createElement("li");
-    //   li.appendChild(child);
-    //   list.appendChild(li);
-    // }
+    child  = document.createElement(childType);
+    child.className = childClassName;
+    child.innerHTML = childInnerHTML;
+    list.appendChild(child);
   }
 }
-
-// async function clonenode(classname) {
-//   const list = document.querySelector(".hm-list");
-//   const listClone = list.cloneNode(true);
-//   return { list, listClone };
-// }
 
 classList.forEach(async function (kind) {
   document.querySelectorAll("." + kind).forEach(async function (el) {
@@ -126,22 +98,16 @@ classList.forEach(async function (kind) {
         // get size constraints of the list
         let min = Math.ceil(Number(constraints["size"].split("__")[0]));
         let max = Math.floor(Number(constraints["size"].split("__")[1]));
-        // random size respecting the given constraints
-        console.log("here");
 
         // const { list, listClone } = await clonenode(".hm-list");
-          const list = document.querySelector(".hm-list");
-          const listClone = list.cloneNode(true);
-          const childInnerHTML = listClone.children[0].innerHTML;
-          const childType = listClone.children[0].nodeName.toLowerCase();
-          const childClassName  = listClone.children[0].className;
-
-        console.log("outside function: list ", list.children[0]);
-        console.log("outside function: listclone ", listClone.children[0]);
+        const list = document.querySelector(".hm-list");
+        const listClone = list.cloneNode(true);
+        const childInnerHTML = listClone.children[0].innerHTML;
+        const childType = listClone.children[0].nodeName.toLowerCase();
+        const childClassName  = listClone.children[0].className;
 
         //generate random list
         setInterval(() => {
-          //  setTimeout(()=>{
           generateRandomList(min, max, list, childType, childClassName, childInnerHTML);
         }, INTERVAL_TIME);
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML-Mocker Demo</title>
+        <link rel="stylesheet" href="https://unpkg.com/twinklecss@1.1.0/twinkle.min.css">
+    </head>
+    <body class="bg-gray-200">
+    <div class="prose max-w-4xl mt-8 mb-8 bg-white shadow-lg rounded-lg mx-auto p-4">
+        <h2>HTML Mocker Demo</h2>
+        <p>This script periodically randomizes the contents of your HTML tags to make it easy to test if your layouts will remain responsive
+            with unexpected dynamic data. It can randomize text length, # of words in a text node, width and height of images via Unsplash, 
+            number of children elements (with recursion) and more.
+        </p>
+        <p>The idea is to detect bugs during development and without having to do manual testing for various boundary conditions of data.
+            This is a work in progress. You can file issues and send PRs on the <a href="https://github.com/ClearTax/html-mocker">GitHub repo</a>.</p>
+
+        <h3 class="hm-text hm-size-10__15"> random heading 😀</h1>
+
+        <div>
+            <h3 class="hm-text hm-size-30__40"> random heading 😀</h3>
+        </div>
+        <br>
+        <div>
+            <h3 class="hm-text hm-size-50__90"> random heading 😀</h3>
+        </div>
+
+        <div>
+            <img class="hm-img hm-size-50x50__500x500" src="" alt="random image">
+        </div>
+
+        <!-- <div>
+            <ol class="hm-list hm-size-1__4">
+                <li><h3 class="hm-list-text hm-size-5__10">one</h3></li>
+                <li><h3 class="hm-list-text hm-size-5__10">two</h3></li>
+            </ol>
+        </div> -->
+
+        <div>
+            <ol class="hm-list hm-size-1__4">
+                <li><img class="hm-list-img hm-size-50x50__100x100" src="" alt="random image"></li>
+                <li><img class="hm-list-img hm-size-50x50__100x100" src="" alt="random image"></li>
+            </ol>
+        </div>
+    </div>
+    <script  src="htmlmocker.js"></script>
+    </body>
+
+</html>       
